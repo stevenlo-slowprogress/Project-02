@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Steven — Designer</title>
+  <meta name="description" content="Steven is an independent designer working across identity, editorial, packaging, and environmental graphics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,450;1,6..72,500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231a1917'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' fill='%23f6f3ee'%3ES%3C/text%3E%3C/svg%3E">
+  <style>
+    :root {
+      --paper: #f4f1eb;
+      --ink: #1a1917;
+      --muted: #6e685f;
+      --line: rgba(26, 25, 23, 0.16);
+      --serif: "Newsreader", "Iowan Old Style", Palatino, "Palatino Linotype", serif;
+      --sans: "Instrument Sans", "Avenir Next", "Segoe UI", sans-serif;
+      --pad: clamp(1.25rem, 4vw, 2.5rem);
+      --measure: 38rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 4.5rem;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      font-weight: 400;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { max-width: 100%; height: auto; }
+
+    a { color: inherit; }
+
+    ::selection {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    :focus-visible {
+      outline: 1px solid var(--ink);
+      outline-offset: 3px;
+    }
+
+    .skip {
+      position: absolute;
+      left: var(--pad);
+      top: 0.75rem;
+      transform: translateY(-140%);
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0.4rem 0.7rem;
+      z-index: 10;
+    }
+
+    .skip:focus { transform: none; }
+
+    .frame {
+      width: min(1120px, calc(100% - var(--pad) * 2));
+      margin: 0 auto;
+    }
+
+    .mast {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.15rem 0 1rem;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mark {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .mast nav {
+      display: flex;
+      gap: 1.35rem;
+    }
+
+    .mast nav a {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .mast nav a:hover { color: var(--ink); }
+
+    .role {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .intro {
+      padding: clamp(4.5rem, 10vw, 7.5rem) 0 0;
+    }
+
+    .kicker {
+      margin: 0 0 1.25rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 12ch;
+      font-family: var(--serif);
+      font-weight: 450;
+      font-size: clamp(3.1rem, 7vw, 5.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.035em;
+    }
+
+    .lede {
+      max-width: var(--measure);
+      margin: 1.75rem 0 0;
+      font-size: 1.15rem;
+      line-height: 1.55;
+    }
+
+    .index {
+      list-style: none;
+      margin: clamp(3.5rem, 7vw, 5.5rem) 0 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .index a {
+      display: grid;
+      grid-template-columns: 2.6rem minmax(0, 1fr) auto;
+      column-gap: 1.25rem;
+      align-items: baseline;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+    }
+
+    .index .num,
+    .discipline,
+    .kind,
+    .section-label,
+    figcaption,
+    .colophon {
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .index .num { grid-column: 1; }
+    .index .name {
+      grid-column: 2;
+      font-family: var(--serif);
+      font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .index .discipline {
+      grid-column: 3;
+      justify-self: end;
+      text-align: right;
+    }
+
+    .index a:hover .name {
+      text-decoration: underline;
+      text-underline-offset: 0.16em;
+      text-decoration-thickness: 1px;
+    }
+
+    .studies { margin-top: clamp(4rem, 8vw, 6rem); }
+
+    .project,
+    .about,
+    .contact {
+      scroll-margin-top: 4.5rem;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 1.5rem 3.5rem;
+      padding: clamp(3rem, 6vw, 4.75rem) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .project .num {
+      display: block;
+      margin-bottom: 0.85rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 450;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .kind { margin: 0.7rem 0 0; }
+
+    .project p {
+      margin: 1.15rem 0 0;
+      max-width: 36rem;
+    }
+
+    figure { margin: 0; }
+
+    figure img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      background: #e4ddd2;
+      filter: saturate(0.82) contrast(0.97);
+    }
+
+    figcaption {
+      margin-top: 0.7rem;
+      max-width: 42rem;
+      line-height: 1.45;
+    }
+
+    .about,
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 1.5rem 3.5rem;
+      padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem 3rem;
+      align-items: start;
+    }
+
+    .about p { margin: 0 0 1rem; }
+
+    .about p:last-child { margin-bottom: 0; }
+    .about figure { margin-top: 1.5rem; }
+
+    .capabilities {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .capabilities li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.95rem;
+    }
+
+    .capabilities span { color: var(--muted); }
+
+    .contact p { margin: 0.4rem 0 0; max-width: var(--measure); }
+
+    .email {
+      display: inline-block;
+      margin-top: 1.25rem;
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      text-underline-offset: 0.12em;
+      text-decoration-thickness: 1px;
+    }
+
+    .email:hover { text-decoration: none; }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem 2rem;
+      padding: 1.4rem 0 2.5rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .colophon { margin: 0; max-width: 36rem; }
+
+    @media (max-width: 720px) {
+      .role { display: none; }
+
+      .project,
+      .about,
+      .contact,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .index a { grid-template-columns: 2.4rem minmax(0, 1fr); }
+      .index .discipline {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start;
+        text-align: left;
+        margin-top: 0.15rem;
+      }
+
+      footer { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
+  <div class="frame">
+    <header class="mast">
+      <a class="mark" href="#top">Steven</a>
+      <nav aria-label="Page">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="role">Designer</p>
+    </header>
+
+    <main id="top">
+      <section class="intro">
+        <p class="kicker">Independent practice</p>
+        <h1>Design for things you can hold.</h1>
+        <p class="lede">I work across identity, print, and objects for makers and cultural rooms. The practice is small on purpose. Each project is specific, material, and built to stay in use.</p>
+      </section>
+
+      <ol class="index" id="work">
+        <li>
+          <a href="#atelier-mare">
+            <span class="num">01</span>
+            <span class="name">Atelier Mare</span>
+            <span class="discipline">Identity &amp; packaging</span>
+          </a>
+        </li>
+        <li>
+          <a href="#reading-room">
+            <span class="num">02</span>
+            <span class="name">The Reading Room</span>
+            <span class="discipline">Environmental graphics</span>
+          </a>
+        </li>
+        <li>
+          <a href="#season">
+            <span class="num">03</span>
+            <span class="name">Season</span>
+            <span class="discipline">Editorial</span>
+          </a>
+        </li>
+        <li>
+          <a href="#vale">
+            <span class="num">04</span>
+            <span class="name">Vale</span>
+            <span class="discipline">Object &amp; packaging</span>
+          </a>
+        </li>
+        <li>
+          <a href="#northline">
+            <span class="num">05</span>
+            <span class="name">Northline</span>
+            <span class="discipline">Catalog</span>
+          </a>
+        </li>
+        <li>
+          <a href="#lumen">
+            <span class="num">06</span>
+            <span class="name">Lumen</span>
+            <span class="discipline">Exhibition</span>
+          </a>
+        </li>
+      </ol>
+
+      <div class="studies">
+        <article class="project" id="atelier-mare">
+          <div>
+            <span class="num">01</span>
+            <h2>Atelier Mare</h2>
+            <p class="kind">Identity &amp; packaging</p>
+            <p>A coastal ceramics studio needed a name that could live on clay, paper, and a small shopfront. The wordmark is drawn from the lip of a bowl: one curve, slightly uneven. Color comes from the slip they already mix — bone, iron, and a tide green reserved for the inside of the mark.</p>
+            <p>Boxes are uncoated board, debossed, and meant to be kept. The shop card is the same board, cut smaller. Nothing in the system asks to be louder than the pot.</p>
+          </div>
+          <figure>
+            <img src="images/mare.jpg" width="1600" height="1067" alt="Stoneware bowls on a pale cloth, a stand-in for Atelier Mare photography.">
+            <figcaption>Placeholder photograph. The finished identity is debossed into uncoated board and stamped into clay.</figcaption>
+          </figure>
+        </article>
+
+        <article class="project" id="reading-room">
+          <div>
+            <span class="num">02</span>
+            <h2>The Reading Room</h2>
+            <p class="kind">Environmental graphics</p>
+            <p>Wayfinding for a neighborhood library annex. Each sign is set like the spine of a book: a short title, a quiet number, and enough margin to breathe. The system runs from the front door to the stacks, then continues on a bookmark that is also the map.</p>
+            <p>Wall type is painted, so it can be revised when a shelf moves. The only color is the annex’s existing oak, left as it was.</p>
+          </div>
+          <figure>
+            <img src="images/reading.jpg" width="1600" height="1067" alt="Library shelves filled with books, a stand-in for The Reading Room.">
+            <figcaption>Placeholder photograph. Signs in the annex read like book spines, in paint on oak.</figcaption>
+          </figure>
+        </article>
+
+        <article class="project" id="season">
+          <div>
+            <span class="num">03</span>
+            <h2>Season</h2>
+            <p class="kind">Editorial</p>
+            <p>Art direction for a quarterly journal about food and the time it takes. An issue holds one long essay, one recipe told plainly, and photographs made in the kitchen where the food was cooked. The grid leaves room. The cover uses the season name and two colors from that issue’s produce.</p>
+            <p>Type is a text serif, with a single display cut for the title. Paper is warm and a little thick, so the issue sits closed like a pamphlet you keep on a shelf.</p>
+          </div>
+          <figure>
+            <img src="images/season.jpg" width="1600" height="1067" alt="A still life of fruit on a table, a stand-in for the Season journal.">
+            <figcaption>Placeholder photograph. Each cover takes its two colors from that season’s produce.</figcaption>
+          </figure>
+        </article>
+
+        <article class="project" id="vale">
+          <div>
+            <span class="num">04</span>
+            <h2>Vale</h2>
+            <p class="kind">Object &amp; packaging</p>
+            <p>A line of five fragrances. The bottles stay clear. A narrow band of cotton paper carries the name, set small, with one rule in dull gold. The box opens flat, like a letter, and the scent notes are written as a short paragraph on the inside.</p>
+            <p>The set shares one structure. What changes is a single word and the weight of the paper band. The design is the editing.</p>
+          </div>
+          <figure>
+            <img src="images/vale.jpg" width="1600" height="1067" alt="Glass bottles on a neutral ground, a stand-in for Vale packaging.">
+            <figcaption>Placeholder photograph. Vale’s bottles are clear glass with a cotton-paper band.</figcaption>
+          </figure>
+        </article>
+
+        <article class="project" id="northline">
+          <div>
+            <span class="num">05</span>
+            <h2>Northline</h2>
+            <p class="kind">Catalog</p>
+            <p>A catalog for a furniture workshop. Pieces are photographed in the room where they are made, in the light that room already has. The grid is wide, the captions are one line, and prices sit in a separate list at the back.</p>
+            <p>The mark is the workshop’s old stamp, redrawn so it holds at the size of a spine. The catalog is the same paper they use for full-size templates, trimmed and sewn.</p>
+          </div>
+          <figure>
+            <img src="images/northline.jpg" width="1600" height="1067" alt="A low sofa in a quiet room, a stand-in for the Northline catalog.">
+            <figcaption>Placeholder photograph. Northline’s pages show each piece in the workshop’s own light.</figcaption>
+          </figure>
+        </article>
+
+        <article class="project" id="lumen">
+          <div>
+            <span class="num">06</span>
+            <h2>Lumen</h2>
+            <p class="kind">Exhibition</p>
+            <p>Identity for a small exhibition about daylight in domestic rooms. The title is set so thin it nearly disappears on a bright wall and reads clearly once the sun moves. We kept that, because it was the subject.</p>
+            <p>Wall texts are short. The booklet uses the same type, smaller, and fits in a coat pocket. Visitors leave with the essay, not a poster.</p>
+          </div>
+          <figure>
+            <img src="images/lumen.jpg" width="1600" height="1067" alt="A bright living room with daylight across the floor, a stand-in for the Lumen exhibition.">
+            <figcaption>Placeholder photograph. Lumen’s title is thinnest where the gallery is brightest.</figcaption>
+          </figure>
+        </article>
+      </div>
+
+      <section class="about" id="about">
+        <h2 class="section-label">About</h2>
+        <div class="about-grid">
+          <div>
+            <p>I am Steven, a designer working on my own. I design the marks, pages, and objects a practice needs once the work leaves the screen: a cup, a sign, a journal, a bottle, a room.</p>
+            <p>Projects start with the material and the place. Who holds it, in what light, and how it should feel after years of use. I would rather remove a decision than add a flourish.</p>
+            <p>I take a few commissions at a time, usually with studios, makers, and cultural spaces. A project often runs from a name through to the piece in hand.</p>
+          </div>
+          <div>
+            <ul class="capabilities">
+              <li>Identity <span>01</span></li>
+              <li>Editorial <span>02</span></li>
+              <li>Packaging <span>03</span></li>
+              <li>Environments <span>04</span></li>
+            </ul>
+            <figure>
+              <img src="images/about.jpg" width="1400" height="933" alt="A quiet interior with a chair and soft daylight, a stand-in for the studio.">
+              <figcaption>Placeholder photograph. The studio is a table, paper, and daylight.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <h2 class="section-label">Contact</h2>
+        <div>
+          <p>I am booking a small number of projects for the coming season. A note about the work, the timing, and what already exists is enough to begin.</p>
+          <a class="email" href="mailto:hello@example.com">hello@example.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="colophon">© 2026 Steven. Set in Newsreader and Instrument Sans. Photographs are placeholders.</p>
+      <p class="colophon">Independent designer.</p>
+    </footer>
+  </div>
+</body>
+</html>
